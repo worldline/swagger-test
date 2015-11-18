@@ -5,6 +5,7 @@
   "main": "lib/swagger-test.js",
   "scripts": {
     "test": "mocha",
+    "watch": "mocha --watch",
     "coverage": "istanbul cover _mocha --report lcovonly -- -R spec",
     "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
