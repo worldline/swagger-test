@@ -22,8 +22,9 @@ describe('test generation with inference', function () {
       assert.deepEqual(xamples[0], {
           "description": "get /pets",
           "request": {
+              "scheme": "http",
               "method": "get",
-              "uri": "localhost/v1/pets"
+              "uri": "http://localhost/v1/pets"
           },
           "response": {
               "status": 200,
@@ -41,8 +42,9 @@ describe('test generation with inference', function () {
               "params": {
                   "id": "fido4"
               },
+              "scheme": "http",
               "method": "get",
-              "uri": "localhost/v1/pets/fido4"
+              "uri": "http://localhost/v1/pets/fido4"
           },
           "response": {
               "status": 200,
@@ -60,8 +62,9 @@ describe('test generation with inference', function () {
             "params": {
                 "id": "fido7"
             },
+            "scheme": "http",
             "method": "get",
-            "uri": "localhost/v1/pets/fido7"
+            "uri": "http://localhost/v1/pets/fido7"
         },
         "response": {
             "status": 200,
