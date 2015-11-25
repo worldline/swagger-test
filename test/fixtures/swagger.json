@@ -5,7 +5,7 @@
     "title": "Pet store"
   },
   "schemes": [
-    "http"
+    "https"
   ],
   "host": "localhost",
   "basePath": "/v1",

@@ -3,16 +3,16 @@
 var fs = require('fs');
 var swaggerTest = require('../lib/swagger-test');
 var expect = require('chai').expect;
+var result = require('./fixtures/swagger-expected-result');
+var spec = require('./fixtures/swagger');
 
 describe('test generation', function () {
-
-  var testDir = __dirname;
-  var buffer  = fs.readFileSync(testDir + '/swagger.json');
-  var spec    = JSON.parse(buffer);
-
-  var xamples = swaggerTest.parse(spec, { inferXamples: true });
+  var xamples;
 
   describe('with inference', function(){
+    before(function(){
+      xamples = swaggerTest.parse(spec, { inferXamples: true });
+    });
 
     it('should contain three test cases', function () {
       expect(xamples.length).to.equal(3);
