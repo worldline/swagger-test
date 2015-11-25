@@ -2,7 +2,7 @@
   "name": "swagger-test",
   "version": "0.2.0",
   "description": "Specification-driven REST API testing",
-  "main": "lib/swagger-test.js",
+  "main": "lib/index.js",
   "scripts": {
     "pretest": "npm run lint",
     "test": "mocha",
