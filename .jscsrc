@@ -1,0 +1,11 @@
+{
+  "disallowFunctionDeclarations": true,
+  "disallowMixedSpacesAndTabs": true,
+  "disallowNewlineBeforeBlockStatements": true,
+  "disallowQuotedKeysInObjects": "allButReserved",
+  "disallowTrailingComma": true,
+  "disallowTrailingWhitespace": true,
+  "maximumLineLength": 120,
+  "requireBlocksOnNewline": true,
+  "requireLineBreakAfterVariableAssignment": true
+}

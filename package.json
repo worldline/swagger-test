@@ -4,10 +4,14 @@
   "description": "Specification-driven REST API testing",
   "main": "lib/swagger-test.js",
   "scripts": {
+    "pretest": "npm run lint",
     "test": "mocha",
-    "watch": "mocha --watch",
-    "coverage": "istanbul cover _mocha --report lcovonly -- -R spec",
-    "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "coverage": "istanbul cover _mocha -- -R spec",
+    "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
+    "lint:jscs": "jscs lib test",
+    "lint:jshint": "jshint lib test",
+    "lint": "npm run lint:jshint && npm run lint:jscs",
+    "watch": "watch 'npm test' ."
   },
   "repository": {
     "type": "git",
@@ -30,10 +34,13 @@
     "url-template": "2.0.4"
   },
   "devDependencies": {
-    "mocha": "2.1.0",
-    "chai": "1.10.0",
-    "istanbul": "0.3.5",
-    "mocha-lcov-reporter": "0.0.1",
-    "coveralls": "2.11.2"
+    "chai": "^3.4.1",
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.4.1",
+    "jscs": "1.10.0",
+    "jshint": "^2.9.1-rc1",
+    "mocha": "^2.1.0",
+    "mocha-lcov-reporter": "^1.0.0",
+    "watch": "^0.16.0"
   }
 }
