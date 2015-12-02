@@ -3,9 +3,10 @@
 exports.petsXample = {
   description: 'get /pets',
   request: {
-    scheme: 'https',
+    scheme: 'http',
+    baseUri: 'localhost/v1',
     method: 'get',
-    uri: 'https://localhost/v1/pets'
+    verb: '/pets'
   },
   response: {
     status: 200,
@@ -18,12 +19,13 @@ exports.petsXample = {
 exports.petsFido4Xample = {
   description: 'get /pets/{id}',
   request: {
+    scheme: 'https',
+    baseUri: 'localhost/v1',
+    method: 'get',
+    verb: '/pets/fido4',
     params: {
       id: 'fido4'
-    },
-    scheme: 'http',
-    method: 'get',
-    uri: 'http://localhost/v1/pets/fido4'
+    }
   },
   response: {
     status: 200,
@@ -36,12 +38,13 @@ exports.petsFido4Xample = {
 exports.petsFido7Xample = {
   description: 'get /pets/{id}',
   request: {
+    scheme: 'http',
+    baseUri: 'localhost/v1',
+    method: 'get',
+    verb: '/pets/fido7',
     params: {
       id: 'fido7'
-    },
-    scheme: 'https',
-    method: 'get',
-    uri: 'https://localhost/v1/pets/fido7'
+    }
   },
   response: {
     status: 200,

@@ -1,7 +1,7 @@
 'use strict';
 
 var testGenerator = require('../lib/test-generation');
-var expect = require('chai').expect;
+var expect = require('must');
 var result = require('./fixtures/generated-test');
 var spec = require('./fixtures/swagger');
 
@@ -18,15 +18,15 @@ describe('test generation', function () {
     });
 
     it('should test GET /pets first', function () {
-      expect(xamples[0]).to.deep.equal(result.petsXample);
+      expect(xamples[0]).to.eql(result.petsXample);
     });
 
     it ('should test GET /pets/fido4 second', function () {
-      expect(xamples[1]).deep.equal(result.petsFido4Xample);
+      expect(xamples[1]).to.eql(result.petsFido4Xample);
     });
 
     it ('should test GET /pets/fido7 last', function () {
-      expect(xamples[2]).deep.equal(result.petsFido7Xample);
+      expect(xamples[2]).to.eql(result.petsFido7Xample);
     });
   });
 
@@ -41,11 +41,11 @@ describe('test generation', function () {
     });
 
     it ('should test GET /pets/fido4 first', function () {
-      expect(xamples[0]).deep.equal(result.petsFido4Xample);
+      expect(xamples[0]).to.eql(result.petsFido4Xample);
     });
 
     it ('should test GET /pets/fido7 last', function () {
-      expect(xamples[1]).deep.equal(result.petsFido7Xample);
+      expect(xamples[1]).to.eql(result.petsFido7Xample);
     });
   });
 });

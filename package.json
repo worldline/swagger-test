@@ -4,7 +4,8 @@
   "description": "Specification-driven REST API testing",
   "main": "lib/index.js",
   "scripts": {
-    "pretest": "npm run lint",
+    "prefullTest": "npm run lint",
+    "fullTest": "npm run test",
     "test": "mocha",
     "coverage": "istanbul cover _mocha -- -R spec",
     "coveralls": "cat ./coverage/lcov.info | coveralls && rm -rf ./coverage",
@@ -31,16 +32,20 @@
   },
   "homepage": "https://github.com/earldouglas/swagger-test",
   "dependencies": {
+    "async": "^1.5.0",
+    "lodash": "^3.10.1",
+    "supertest": "^1.1.0",
     "url-template": "2.0.4"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
     "coveralls": "^2.11.2",
     "istanbul": "^0.4.1",
     "jscs": "1.10.0",
     "jshint": "^2.9.1-rc1",
-    "mocha": "^2.1.0",
+    "mocha": "^2.3.4",
     "mocha-lcov-reporter": "^1.0.0",
+    "must": "^0.13.1",
+    "nock": "^3.3.2",
     "watch": "^0.16.0"
   }
 }

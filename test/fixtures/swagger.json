@@ -5,7 +5,7 @@
     "title": "Pet store"
   },
   "schemes": [
-    "https"
+    "http"
   ],
   "host": "localhost",
   "basePath": "/v1",
@@ -41,7 +41,7 @@
         "x-amples": [
           {
             "request": {
-              "scheme": "http",
+              "scheme": "https",
               "params": {
                 "id": "fido4"
               }
