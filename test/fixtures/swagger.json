@@ -17,7 +17,14 @@
           "200": {
             "description": "Returns all the pets"
           }
-        }
+        },
+        "x-amples": [
+          {
+            "response": {
+              "status": 200
+            }
+          }
+        ]
       }
     },
     "/pets/{id}": {
