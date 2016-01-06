@@ -4,6 +4,7 @@ var expect = require('must');
 var _ = require('lodash');
 var testLauncher = require('../lib/test-launcher');
 var generatedTest = require('./fixtures/generated-test');
+var testResult = require('./fixtures/test-result');
 var nock = require('nock');
 nock.disableNetConnect();
 
@@ -31,16 +32,7 @@ describe('test launcher', function () {
           'content-type': 'application/json'
         });
 
-      var expectedResult = [
-        _.merge({
-          result:{
-            status: 'OK',
-            error: null
-          }
-        }, generatedTest.petsXample)
-      ];
-
-      launchTest([ generatedTest.petsXample ], expectedResult, [stub], done);
+      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyOk, [stub], done);
     });
 
     it('should return WARN if the received response has a body', function(done){
@@ -50,16 +42,7 @@ describe('test launcher', function () {
           'content-type': 'application/json'
         });
 
-      var expectedResult = [
-        _.merge({
-          result:{
-            status: 'WARN',
-            error: 'There is no body defined in the test but a body response has been received'
-          }
-        }, generatedTest.petsXample)
-      ];
-
-      launchTest([ generatedTest.petsXample ], expectedResult, [stub], done);
+      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyWarn, [stub], done);
     });
 
     it('should return KO if the response is not the expected one', function(done){
@@ -78,7 +61,7 @@ describe('test launcher', function () {
         }, generatedTest.petsXample)
       ];
 
-      launchTest([ generatedTest.petsXample ], expectedResult, [stub], done);
+      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyKo, [stub], done);
     });
   });
 
@@ -102,24 +85,11 @@ describe('test launcher', function () {
           'content-type': 'application/json'
         });
 
-      var result = {
-        result:{
-          status: 'OK',
-          error: null
-        }
-      };
-
-      var expectedResult = [
-        _.merge({}, result,  generatedTest.petsXample),
-        _.merge({}, result,  generatedTest.petsFido4Xample),
-        _.merge({}, result,  generatedTest.petsFido7Xample)
-      ];
-
       launchTest([
           generatedTest.petsXample,
           generatedTest.petsFido4Xample,
           generatedTest.petsFido7Xample
-      ], expectedResult, [stubPets, stubPetsFido4, stubPetsFido7], done);
+      ], testResult.allXampleOK, [stubPets, stubPetsFido4, stubPetsFido7], done);
     });
   });
 

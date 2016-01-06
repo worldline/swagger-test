@@ -13,7 +13,6 @@ describe('test generation', function () {
   });
 
   it('should contain three test cases', function () {
-    console.log(xamples);
     expect(xamples.length).to.equal(3);
   });
 
