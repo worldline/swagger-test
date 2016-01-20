@@ -43,7 +43,8 @@ describe('Test Reporting', function () {
     expect(consoleText).to.eql([
       colors.green('\u2713') + ' '+ testResult.allXampleOK[0].description,
       colors.green('\u2713') + ' '+ testResult.allXampleOK[1].description,
-      colors.green('\u2713') + ' '+ testResult.allXampleOK[2].description
+      colors.green('\u2713') + ' '+ testResult.allXampleOK[2].description,
+      colors.green('\u2713') + ' '+ testResult.allXampleOK[3].description
     ]);
   });
 

@@ -12,7 +12,9 @@
   "paths": {
     "/pets": {
       "get": {
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "Returns all the pets"
@@ -29,7 +31,9 @@
     },
     "/pets/{id}": {
       "get": {
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -74,6 +78,68 @@
             }
           }
         ]
+      }
+    },
+    "/advancedPets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all the pets",
+            "schema": {
+              "title": "Pets",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        },
+        "x-amples": [
+          {
+            "response": {
+              "status": 200,
+              "body": [
+                {
+                  "name": "Goofy",
+                  "birthday": 2008
+                },
+                {
+                  "name": "Andy",
+                  "birthday": 2010
+                },
+                {
+                  "name": "Kitty",
+                  "birthday": 1999
+                },
+                {
+                  "name": "Chick",
+                  "birthday": 2013
+                },
+                {
+                  "name": "Cat",
+                  "birthday": 2011
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     }
   }

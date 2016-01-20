@@ -53,3 +53,35 @@ exports.petsFido7Xample = {
     }
   }
 };
+
+exports.advancedPetsXample = {
+  description: 'get /advancedPets',
+  request: {
+    scheme: 'http',
+    baseUri: 'localhost/v1',
+    method: 'get',
+    verb: '/advancedPets'
+  },
+  response: {
+    status: 200,
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: [{
+      "name": "Goofy",
+      "birthday": 2008
+    }, {
+      "name": "Andy",
+      "birthday": 2010
+    }, {
+      "name": "Kitty",
+      "birthday": 1999
+    }, {
+      "name": "Chick",
+      "birthday": 2013
+    }, {
+      "name": "Cat",
+      "birthday": 2011
+    }]
+  }
+};

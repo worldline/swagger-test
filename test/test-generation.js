@@ -13,18 +13,22 @@ describe('test generation', function () {
   });
 
   it('should contain three test cases', function () {
-    expect(xamples.length).to.equal(3);
+    expect(xamples.length).to.equal(4);
   });
 
-  it ('should test GET /pets', function () {
+  it('should test GET /pets', function () {
     expect(xamples[0]).to.eql(result.petsXample);
   });
 
-  it ('should test GET /pets/fido4', function () {
+  it('should test GET /pets/fido4', function () {
     expect(xamples[1]).to.eql(result.petsFido4Xample);
   });
 
-  it ('should test GET /pets/fido7', function () {
+  it('should test GET /pets/fido7', function () {
     expect(xamples[2]).to.eql(result.petsFido7Xample);
+  });
+
+  it('should test GET /advancedPets', function(){
+    expect(xamples[3]).to.eql(result.advancedPetsXample);
   });
 });

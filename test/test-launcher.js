@@ -17,7 +17,6 @@ describe('test launcher', function () {
       });
 
       expect(result).to.eql(expectedResult);
-
       done();
     });
   };
@@ -52,16 +51,36 @@ describe('test launcher', function () {
           'content-type': 'application/xml'
         });
 
-      var expectedResult = [
-        _.merge({
-          result:{
-            status: 'KO',
-            error: new Error('expected \"content-type\" of \"application/json\", got \"application/json\"')
-          }
-        }, generatedTest.petsXample)
-      ];
-
       launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyKo, [stub], done);
+    });
+
+    it('should return KO if the server cannot be reached', function(done){
+      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyKo, [stub], done);
+    });
+  });
+
+  describe('given an Xample with a body response', function(){
+    var stub;
+    it('should return KO if the body response is not the expected one', function(done){
+      stub = nock('http://localhost')
+        .get('/v1/advancedPets')
+        .reply(200, {}, {
+          'content-type': 'application/json'
+        });
+
+      launchTest([ generatedTest.advancedPetsXample ], testResult.advancedPetsXampleOnlyKo, [stub], done);
+
+    });
+
+    it('should return OK if the body response is the expected one', function(done){
+      stub = nock('http://localhost')
+        .get('/v1/advancedPets')
+        .reply(200, generatedTest.advancedPetsXample.response.body, {
+          'content-type': 'application/json'
+        });
+
+      launchTest([ generatedTest.advancedPetsXample ], testResult.advancedPetsXampleOnlyOk, [stub], done);
+
     });
   });
 
@@ -85,11 +104,18 @@ describe('test launcher', function () {
           'content-type': 'application/json'
         });
 
+      var stubAdvancedPets = nock('http://localhost')
+        .get('/v1/advancedPets')
+        .reply(200, generatedTest.advancedPetsXample.response.body, {
+          'content-type': 'application/json'
+        });
+
       launchTest([
           generatedTest.petsXample,
           generatedTest.petsFido4Xample,
-          generatedTest.petsFido7Xample
-      ], testResult.allXampleOK, [stubPets, stubPetsFido4, stubPetsFido7], done);
+          generatedTest.petsFido7Xample,
+          generatedTest.advancedPetsXample
+      ], testResult.allXampleOK, [stubPets, stubPetsFido4, stubPetsFido7, stubAdvancedPets], done);
     });
   });
 
