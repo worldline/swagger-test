@@ -4,9 +4,9 @@ exports.petsXample = {
   description: 'get /pets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets'
+    uri: '/pets'
   },
   response: {
     status: 200,
@@ -20,10 +20,10 @@ exports.petsFido4Xample = {
   description: 'get /pets/{id}',
   request: {
     scheme: 'https',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets/fido4',
-    params: {
+    uri: '/pets/fido4',
+    path: {
       id: 'fido4'
     }
   },
@@ -39,10 +39,10 @@ exports.petsFido7Xample = {
   description: 'get /pets/{id}',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets/fido7',
-    params: {
+    uri: '/pets/fido7',
+    path: {
       id: 'fido7'
     }
   },
@@ -58,9 +58,9 @@ exports.advancedPetsXample = {
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets'
+    uri: '/advancedPets'
   },
   response: {
     status: 200,
@@ -68,20 +68,43 @@ exports.advancedPetsXample = {
       'content-type': 'application/json'
     },
     body: [{
-      "name": "Goofy",
-      "birthday": 2008
+      name: 'Goofy',
+      birthday: 2008
     }, {
-      "name": "Andy",
-      "birthday": 2010
+      name: 'Andy',
+      birthday: 2010
     }, {
-      "name": "Kitty",
-      "birthday": 1999
+      name: 'Kitty',
+      birthday: 1999
     }, {
-      "name": "Chick",
-      "birthday": 2013
+      name: 'Chick',
+      birthday: 2013
     }, {
-      "name": "Cat",
-      "birthday": 2011
+      name: 'Cat',
+      birthday: 2011
+    }]
+  }
+};
+
+exports.advancedPetsWithQueryParamXample = {
+  description: 'get /advancedPetsWithQueryParam',
+  request: {
+    scheme: 'http',
+    baseUrl: 'localhost/v1',
+    method: 'get',
+    uri: '/advancedPetsWithQueryParam',
+    query: {
+      limit: 1
+    }
+  },
+  response: {
+    status: 200,
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: [{
+      name: 'Goofy',
+      birthday: 2008
     }]
   }
 };

@@ -53,7 +53,7 @@
           {
             "request": {
               "scheme": "https",
-              "params": {
+              "path": {
                 "id": "fido4"
               }
             },
@@ -66,7 +66,7 @@
           },
           {
             "request": {
-              "params": {
+              "path": {
                 "id": "fido7"
               }
             },
@@ -121,6 +121,54 @@
                 {
                   "name": "Cat",
                   "birthday": 2011
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/advancedPetsWithQueryParam": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "number of pets to return",
+            "type": "integer",
+            "default": 5,
+            "minimum": 1,
+            "maximum": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all the pets",
+            "schema": {
+              "title": "Pets",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        },
+        "x-amples": [
+          {
+            "request": {
+              "query": {
+                "limit": 1
+              }
+            },
+            "response": {
+              "status": 200,
+              "body": [
+                {
+                  "name": "Goofy",
+                  "birthday": 2008
                 }
               ]
             }

@@ -6,20 +6,23 @@ var testLauncher = require('../lib/test-launcher');
 var generatedTest = require('./fixtures/generated-test');
 var testResult = require('./fixtures/test-result');
 var nock = require('nock');
-nock.disableNetConnect();
 
 describe('test launcher', function () {
 
   var launchTest = function(xample, expectedResult, stubs, done){
     testLauncher.launch(xample, function(result){
       _.forEach(stubs, function(stub){
-        expect(stub.isDone()).to.be.true();
+        expect(stub.isDone(), 'pending mocks: ' + JSON.stringify(stub.pendingMocks())).to.be.true();
       });
 
       expect(result).to.eql(expectedResult);
       done();
     });
   };
+
+  beforeEach(function(){
+    nock.cleanAll();
+  });
 
   describe('given a Xample without any response', function(){
     var stub;
@@ -51,7 +54,7 @@ describe('test launcher', function () {
           'content-type': 'application/xml'
         });
 
-      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyKo, [stub], done);
+      launchTest([ generatedTest.petsXample ], testResult.petsXampleOnlyKoByBadBody, [stub], done);
     });
 
     it('should return KO if the server cannot be reached', function(done){
@@ -82,6 +85,21 @@ describe('test launcher', function () {
       launchTest([ generatedTest.advancedPetsXample ], testResult.advancedPetsXampleOnlyOk, [stub], done);
 
     });
+
+    describe('and a query param', function(){
+      it('should use the query param', function(done){
+        stub = nock('http://localhost')
+          .get('/v1/advancedPetsWithQueryParam')
+          .query({limit: 1})
+          .reply(200, generatedTest.advancedPetsWithQueryParamXample.response.body, {
+            'content-type': 'application/json'
+          });
+
+        launchTest([ generatedTest.advancedPetsWithQueryParamXample ], testResult.advancedPetsWithQueryParamXample,
+            [stub], done);
+      });
+    });
+
   });
 
   describe('given a complete Xample', function(){

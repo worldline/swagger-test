@@ -12,8 +12,8 @@ describe('test generation', function () {
     xamples = testGenerator.parse(spec, { inferXamples: false });
   });
 
-  it('should contain three test cases', function () {
-    expect(xamples.length).to.equal(4);
+  it('should contain 5 test cases', function () {
+    expect(xamples.length).to.equal(5);
   });
 
   it('should test GET /pets', function () {
@@ -30,5 +30,9 @@ describe('test generation', function () {
 
   it('should test GET /advancedPets', function(){
     expect(xamples[3]).to.eql(result.advancedPetsXample);
+  });
+
+  it('should test GET /advancedPetsWithQueryParam', function(){
+    expect(xamples[4]).to.eql(result.advancedPetsWithQueryParamXample);
   });
 });

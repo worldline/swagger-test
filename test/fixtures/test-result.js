@@ -1,12 +1,14 @@
 'use strict';
 
+var _ = require('lodash');
+
 exports.petsXampleOnlyOk = [{
   description: 'get /pets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets'
+    uri: '/pets'
   },
   response: {
     status: 200,
@@ -24,9 +26,9 @@ exports.petsXampleOnlyWarn = [{
   description: 'get /pets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets'
+    uri: '/pets'
   },
   response: {
     status: 200,
@@ -40,13 +42,13 @@ exports.petsXampleOnlyWarn = [{
   }
 }];
 
-exports.petsXampleOnlyKo = [{
+exports.petsXampleOnlyKoByBadBody= [{
   description: 'get /pets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets'
+    uri: '/pets'
   },
   response: {
     status: 200,
@@ -56,7 +58,33 @@ exports.petsXampleOnlyKo = [{
   },
   result:{
     status: 'KO',
-    error: new Error('expected \'content-type\' of \'application/json\', got \'application/json\'')
+    error: _.merge(new Error('Responses are different'),{
+      diff: [{
+        headers:{
+          'content-type': 'application/json'
+        }}],
+      unexpected: []
+    })
+  }
+}];
+
+exports.petsXampleOnlyKo = [{
+  description: 'get /pets',
+  request: {
+    scheme: 'http',
+    baseUrl: 'localhost/v1',
+    method: 'get',
+    uri: '/pets'
+  },
+  response: {
+    status: 200,
+    headers: {
+      'content-type': 'application/json'
+    }
+  },
+  result:{
+    status: 'KO',
+    error: new Error('Cannot connect to http://localhost/v1/pets')
   }
 }];
 
@@ -64,9 +92,9 @@ exports.advancedPetsXampleOnlyOk = [{
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets'
+    uri: '/advancedPets'
   },
   response: {
     status: 200,
@@ -100,9 +128,9 @@ exports.advancedPetsXampleOnlyWarn = [{
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets'
+    uri: '/advancedPets'
   },
   response: {
     status: 200,
@@ -132,33 +160,13 @@ exports.advancedPetsXampleOnlyWarn = [{
   }
 }];
 
-
-var error = new Error('');
-error.expected = [{
-        name: 'Goofy',
-        birthday: 2008
-      }, {
-        name: 'Andy',
-        birthday: 2010
-      }, {
-        name: 'Kitty',
-        birthday: 1999
-      }, {
-        name: 'Chick',
-        birthday: 2013
-      }, {
-        name: 'Cat',
-        birthday: 2011
-      }];
-error.actual = {};
-error.showDiff = true;
 exports.advancedPetsXampleOnlyKo = [{
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets'
+    uri: '/advancedPets'
   },
   response: {
     status: 200,
@@ -184,7 +192,27 @@ exports.advancedPetsXampleOnlyKo = [{
   },
   result:{
     status: 'KO',
-    error: error
+    error: _.merge(new Error('Responses are different'), {
+      diff: [{
+        body:[{
+          name:'Goofy',
+          birthday:2008
+        },{
+          name:'Andy',
+          birthday:2010
+        },{
+          name:'Kitty',
+          birthday:1999
+        },{
+          name:'Chick',
+          birthday:2013
+        },{
+          name:'Cat',
+          birthday:2011
+        }]
+      }],
+      unexpected: []
+    })
   }
 }];
 
@@ -192,9 +220,9 @@ exports.advancedPetsXampleOnlyOk = [{
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets'
+    uri: '/advancedPets'
   },
   response: {
     status: 200,
@@ -224,13 +252,41 @@ exports.advancedPetsXampleOnlyOk = [{
   }
 }];
 
+exports.advancedPetsWithQueryParamXample = [{
+  description: 'get /advancedPetsWithQueryParam',
+  request: {
+    scheme: 'http',
+    baseUrl: 'localhost/v1',
+    method: 'get',
+    uri: '/advancedPetsWithQueryParam',
+    query: {
+      limit: 1
+    }
+  },
+  response: {
+    status: 200,
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: [{
+      name: 'Goofy',
+      birthday: 2008
+    }]
+  },
+  result:{
+    status: 'OK',
+    error: null
+  }
+
+}];
+
 exports.allXampleOK = [{
   description: 'get /pets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets'
+    uri: '/pets'
   },
   response: {
     status: 200,
@@ -247,10 +303,10 @@ exports.allXampleOK = [{
   description: 'get /pets/{id}',
   request: {
     scheme: 'https',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets/fido4',
-    params: {
+    uri: '/pets/fido4',
+    path: {
       id: 'fido4'
     }
   },
@@ -269,10 +325,10 @@ exports.allXampleOK = [{
   description: 'get /pets/{id}',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/pets/fido7',
-    params: {
+    uri: '/pets/fido7',
+    path: {
       id: 'fido7'
     }
   },
@@ -291,9 +347,9 @@ exports.allXampleOK = [{
   description: 'get /advancedPets',
   request: {
     scheme: 'http',
-    baseUri: 'localhost/v1',
+    baseUrl: 'localhost/v1',
     method: 'get',
-    verb: '/advancedPets',
+    uri: '/advancedPets'
   },
   response: {
     status: 200,

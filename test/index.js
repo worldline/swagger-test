@@ -4,7 +4,7 @@ var expect = require('must');
 var index = require('../lib/index');
 var testGenerator = require('../lib/test-generation');
 var testLauncher = require('../lib/test-launcher');
-var reporter = require('../lib/reporter')
+var reporter = require('../lib/reporter');
 
 describe('The global interface', function(){
 
